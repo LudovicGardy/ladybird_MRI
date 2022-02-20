@@ -17,14 +17,14 @@ To run the program, user can either open the script "_**start_app.py**_" using t
 > python start_app.py
 ```
 
-![](fullpannel_and_zoom.png)
+![](illustrations/fullpannel_and_zoom.png)
 
 # 3. Dependencies
-cv2==4.5.5
-imageio==2.14.1
-pydicom==2.2.2
-PyQt5==5.15.6
-matplotlib==3.5.1
-nibabel==3.2.1
-numpy==1.21.5
-scipy==1.7.3
+- cv2==4.5.5
+- imageio==2.14.1
+- pydicom==2.2.2
+- PyQt5==5.15.6
+- matplotlib==3.5.1
+- nibabel==3.2.1
+- numpy==1.21.5
+- scipy==1.7.3
