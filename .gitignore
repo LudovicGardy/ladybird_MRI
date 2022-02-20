@@ -1,0 +1,7 @@
+### Ignore these folders
+__pycache__/
+.vs/
+pptx/
+
+### Ignore these files
+illustrations.pptx
