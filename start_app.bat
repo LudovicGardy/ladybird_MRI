@@ -1,3 +1,3 @@
 @echo off
-"python.exe" "start_app.py"
+"C:\Users\GARDy\AppData\Local\Continuum\anaconda3\envs\ldb_tf27\python.exe" "start_app.py"
 pause

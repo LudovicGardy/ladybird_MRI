@@ -6,14 +6,15 @@ Encoding: UTF-8
 """
 import os
 
-from PyQt5.QtWidgets import (QWidget, QVBoxLayout, QSizePolicy, 
+from PyQt5.QtWidgets import (QWidget, QVBoxLayout, QSizePolicy,
     QHBoxLayout, QFrame, QSlider)
 from PyQt5 import (QtCore, QtGui)
 from PyQt5.QtGui import QIcon
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
 
-from Ladybird_MRI_viz.MRI_load_plot import (load_volume, plot_volume)
+from Ladybird_MRI_viz.load_volume import load_volume
+from Ladybird_MRI_viz.plot_volume import plot_volume
 from Ladybird_MRI_viz.widgets.custom_slider import custom_slider
 
 class MplCanvas(FigureCanvas):
@@ -43,9 +44,9 @@ class MplCanvas(FigureCanvas):
 
         if event.dblclick and type(self.volume) != None and type(self.slice_type) != None and type(self.current_slice) != None:
 
-            self.zoom_plot = MRI_zoom(self.volume, self.slice_type, self.current_slice, self.rotation, self.kernel, self.file_type, self.atlas_name)
+            self.zoom_plot = Zoomed_window(self.volume, self.slice_type, self.current_slice, self.rotation, self.kernel, self.file_type, self.atlas_name)
 
-class MRI_zoom(QWidget):
+class Zoomed_window(QWidget):
     '''
     Open a new simple window displaying a zoom of the View 1, 2 or 3 of the volume.
     '''
@@ -66,7 +67,7 @@ class MRI_zoom(QWidget):
         self.kernel = kernel
         self.file_type = file_type
         self.atlas_name = atlas_name
-        
+
         self.init_values()
 
         self.show()

@@ -8,7 +8,7 @@ import sys
 from PyQt5.QtCore import QCoreApplication
 from PyQt5.QtWidgets import (QApplication)
 
-from Ladybird_MRI_viz.MRIwin import MRI
+from Ladybird_MRI_viz.main_window import Main_Win
 
 if __name__ == "__main__":
     # Avoid python kernel from dying
@@ -17,6 +17,6 @@ if __name__ == "__main__":
         app = QApplication(sys.argv)
 
     # run
-    mywindow = MRI()
+    mywindow = Main_Win()
     mywindow.show()
     sys.exit(app.exec_())
