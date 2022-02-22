@@ -18,6 +18,16 @@ from Ladybird_MRI_viz.plot_volume import plot_volume
 from Ladybird_MRI_viz.widgets.custom_slider import custom_slider
 
 class MplCanvas(FigureCanvas):
+    """
+    This class is called by Ladybird_MRI_viz.Main_Win (QMainWindow) and by
+    Zoomed_window(QWidget).  It is used into the figure canvas to display images
+    through the GUI.
+
+    Parameters
+    ----------
+    inheritance: FigureCanvas
+        matplotlib.backends.backend_qt5agg.FigureCanvas
+    """
 
     def __init__(self, parent=None, width=5, height=4, dpi=100, facecol = 'black', file_type = "", atlas_name = ""):
         self.fig = Figure(figsize=(width, height), dpi=dpi)
@@ -48,7 +58,38 @@ class MplCanvas(FigureCanvas):
 
 class Zoomed_window(QWidget):
     '''
-    Open a new simple window displaying a zoom of the View 1, 2 or 3 of the volume.
+    Open a new simple window displaying a zoom of the
+    View 1, 2 or 3 of the volume.
+
+    Parameters
+    ----------
+    inheritance: FigureCanvas
+        matplotlib.backends.backend_qt5agg.FigureCanvas
+
+    rotation: int
+        0=0 degrees
+        1=90 degrees
+        2=180 degrees
+        3=270 degrees
+
+    volume: 3D numpy array
+        The image (cube)
+
+    slice_type: str
+        "View1": Sagittal
+        "View2": Coronal
+        "View3": Axial
+
+    kernel: list or numpy array
+        If empty: image won't be convolved
+        If 2D: image will be convolved using this kernel
+
+    file_type:  str
+        "nifti" or "dicom" or "template"
+
+    atlas_name: str
+        If file_type=='template', the template will be colored using a
+        custom array        
     '''
 
     def __init__(self, volume, slice_type, current_slice, rotation, kernel, file_type, atlas_name):

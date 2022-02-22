@@ -22,6 +22,17 @@ from Ladybird_MRI_viz.zoomed_window import MplCanvas
 from Ladybird_MRI_viz.widgets.custom_slider import custom_slider
 
 class Main_Win(QMainWindow):
+    """
+    This class displays the main window of the program, with the menu.
+    At initialization, user can load data, that will be displayed
+    among 3 planes (cube), using the customWidget (QWidget) class.
+
+    Parameters
+    ----------
+    inheritance: QMainWindow
+        PyQt5.QtWidgets.QMainWindow
+    """
+
     def __init__(self):
         super().__init__()
 
@@ -66,33 +77,50 @@ class Main_Win(QMainWindow):
             current_script_directory = os.path.dirname(os.path.realpath('__file__'))
             fpath =  os.path.join(current_script_directory, "Ladybird_MRI_viz", "examples", "atlas")
             template_name  = file_type.split("-")[-1]
-            MRI_filepath = os.path.join(fpath,"{}.nii.gz".format(template_name))
+            fpath = os.path.join(fpath,"{}.nii.gz".format(template_name))
 
         if "nifti" in file_type and "template" not in file_type:
-            MRI_filepath = QFileDialog.getOpenFileName(None, "Select a NIfTI file:", fpath, "NIfTI files (*.nii *nii.gz)")[0]
+            fpath = QFileDialog.getOpenFileName(None, "Select a NIfTI file:", fpath, "NIfTI files (*.nii *nii.gz)")[0]
         elif "dicom" in file_type and "template" not in file_type:
-            MRI_filepath = QFileDialog.getExistingDirectory(None, 'Select a DICOM folder:', fpath, QFileDialog.ShowDirsOnly)
+            fpath = QFileDialog.getExistingDirectory(None, 'Select a DICOM folder:', fpath, QFileDialog.ShowDirsOnly)
 
         try:
-            # Set Central Widget
-            self.MRIviz_centWidget = customWidget(MRI_filepath, file_type)
+            ### Set Central Widget
+            self.MRIviz_centWidget = customWidget(fpath, file_type)
             self.setCentralWidget(self.MRIviz_centWidget)
         except:
             var = traceback.format_exc()
             print(var)
 
 class customWidget(QWidget):
+    """
+    This class is called by Main_Win (QMainWindow) once user have selected
+    the data, to display the images in 3 planes.
+    A parameter frame will also be created with some buttons so that user can
+    apply images processing features.
 
-    def __init__(self, filepath, file_type):
+    Parameters
+    ----------
+    inheritance: QWidget
+        PyQt5.QtWidgets.QWidget
+
+    fpath: str
+        If nifti: filepath
+        If DICOM: folderpath
+
+    file_type: str
+        "nifti" or "dicom"
+    """
+    def __init__(self, fpath, file_type):
 
         super().__init__()
         self.file_type = file_type
-        self.filepath = filepath
+        self.fpath = fpath
         self.atlas_name = ""
         slider = custom_slider()
 
         self.setStyleSheet("background-color: black;")
-        self.volume = load_volume(self.filepath, file_type)
+        self.volume = load_volume(self.fpath, file_type)
         self.original_volume = self.volume
         self.kernel = []
         self.file_type = file_type
@@ -103,11 +131,11 @@ class customWidget(QWidget):
         self.rotation_view2 = self.rotations_pos[self.rotations_idx]
         self.rotation_view3 = self.rotations_pos[self.rotations_idx]
 
-        if "ct" in self.filepath.lower():
+        if "ct" in self.fpath.lower():
             self.brightness_button_fun("Sqrt")
 
         if "template" in file_type:
-            self.atlas_name = os.path.split(self.filepath)[-1].split(".")[0]
+            self.atlas_name = os.path.split(self.fpath)[-1].split(".")[0]
 
         current_script_directory = os.path.dirname(os.path.realpath('__file__'))
         icones_folderpath = os.path.join(current_script_directory, "ladybird/icones/32x32").replace("\\", "/")
@@ -133,7 +161,12 @@ class customWidget(QWidget):
         view1_Frame.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
 
         view1_label = QLabel()
-        view1_label.setText("Anat. plan 1")
+
+        if "nifti" in file_type.lower():
+            view1_label.setText("Anat. plan 1")
+        else:
+            view1_label.setText("Plan 1")
+
         view1_label.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         view1_label.setFixedHeight(50)
         view1_label.setFont(QtGui.QFont("", 20, QtGui.QFont.Bold))
@@ -166,7 +199,12 @@ class customWidget(QWidget):
         view2_Frame.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
 
         view2_label = QLabel()
-        view2_label.setText("Anat. plan 2")
+
+        if "nifti" in file_type.lower():
+            view2_label.setText("Anat. plan 2")
+        else:
+            view2_label.setText("Pan 2")
+
         view2_label.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         view2_label.setFixedHeight(50)
         view2_label.setFont(QtGui.QFont("", 20, QtGui.QFont.Bold))
@@ -206,7 +244,12 @@ class customWidget(QWidget):
         view3_Frame.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
 
         view3_label = QLabel()
-        view3_label.setText("Anat. plan 3")
+
+        if "nifti" in file_type.lower():
+            view3_label.setText("Anat. plan 3")
+        else:
+            view3_label.setText("Plan 3")
+
         view3_label.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         view3_label.setFixedHeight(50)
         view3_label.setFont(QtGui.QFont("", 20, QtGui.QFont.Bold))
@@ -476,7 +519,7 @@ class customWidget(QWidget):
         elif contrast_volume == "Contour":
             self.kernel = "sobel"
 
-        # Send new volume to canvas object for zoom window
+        ### Send new volume to canvas object for zoom window
         self.view1_Canvas.kernel = self.kernel
         self.view3_Canvas.kernel = self.kernel
         self.view2_Canvas.kernel = self.kernel
@@ -493,7 +536,7 @@ class customWidget(QWidget):
         elif brightness_volume == "Log":
             self.volume = np.log(self.original_volume)
 
-        # Send new volume to canvas object for zoom window
+        ### Send new volume to canvas object for zoom window
         self.view1_Canvas.volume = self.volume
         self.view3_Canvas.volume = self.volume
         self.view2_Canvas.volume = self.volume

@@ -6,21 +6,55 @@ import cv2
 from scipy import ndimage
 
 def plot_volume(rotation, volume, slice_type, n_slice, ax= [], kernel = [], file_type = "", atlas_name = ""):
+    """
+    This function is called by the GUI when user intend to display images or to
+    update them.
+
+    Parameters
+    ----------
+    rotation: int
+        0=0 degrees
+        1=90 degrees
+        2=180 degrees
+        3=270 degrees
+
+    volume: 3D numpy array
+        The image (cube)
+
+    slice_type: str
+        "View1": Sagittal
+        "View2": Coronal
+        "View3": Axial
+
+    n_slice: int
+        Position in the 3D image of the slice of intereset, depending on the
+        < view > parameter
+
+    ax (optional): plt.axis object
+        If empty, a new plot is created. For users who would use this function
+        outside the GUI.
+
+    kernel (optional): list or numpy array
+        If empty: image won't be convolved
+        If 2D: image will be convolved using this kernel
+
+    file_type (optional): str
+        "nifti" or "dicom" or "template"
+
+    atlas_name (optional): str
+        If file_type=='template', the template will be colored using a
+        custom array
+    """
 
     #rotation = 0
-
     if not ax:
-
         f, ax = plt.subplots()
 
     if slice_type == "View_3":
-        #img = np.rot90(volume[:, :, n_slice],rotation)
         img = volume[:, :, n_slice]
     elif slice_type == "View_2":
-        #img = np.rot90(volume[:, n_slice, :],rotation)
         img = volume[:, n_slice, :]
     elif slice_type == "View_1":
-        #img = np.rot90(volume[n_slice, :, :],rotation)
         img = volume[n_slice, :, :]
 
     img = np.rot90(img,rotation)

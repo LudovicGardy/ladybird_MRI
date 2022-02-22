@@ -9,38 +9,50 @@ import numpy as np
 import nibabel as nib
 from pydicom import dcmread
 
-def load_volume(folderpath, file_type):
+def load_volume(fpath, file_type):
+    """
+    Returns a cube (numpy 3D array)
 
-    # init
+    Parameters
+    ----------
+    fpath: str
+        If nifti: filepath
+        If DICOM: folderpath
+
+    file_type: str
+        "nifti" or "dicom"
+    """
+
+    ### Init
     volume = None
 
     if file_type == "dicom":
 
-        # Get file names into the images folder
-        file_list = os.listdir(folderpath)
+        ### Get file names into the images folder
+        file_list = os.listdir(fpath)
 
-        # Read each 2D image and save it into a list
+        ### Store every 2D image into a list
         allimages_list = []
 
         for file_name in file_list:
 
-            ds = dcmread(folderpath + "/" + file_name)
+            ds = dcmread(fpath + "/" + file_name)
             allimages_list.append(ds.pixel_array)
 
         volume = np.array(allimages_list)
 
     elif "nifti" in file_type:
-        v = nib.load(folderpath)
+        v = nib.load(fpath)
         volume = v.get_fdata()
 
-        # remove 4rd dimension (time) if exists because we are not watching
-        #- dynamic images
+        # Remove 4rd dimension (time) if exists because we are not watching
+        #- dynamic images such as fMRI
         if len(volume.shape) >= 4:
             volume = volume[:,:,:,0]
 
     else:
 
-        print(os.path.split(folderpath)[0], "is not an imagery file. Not added to the volume.")
+        print(os.path.split(fpath)[0], "is not an imagery file. Not added to the volume.")
 
     if type(volume) != type(None):
         print("Volume dimensions", volume.shape)
