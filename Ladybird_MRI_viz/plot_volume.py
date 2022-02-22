@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import matplotlib
 import imageio
 import cv2
+from scipy import ndimage
 
 def plot_volume(rotation, volume, slice_type, n_slice, ax= [], kernel = [], file_type = "", atlas_name = ""):
 
