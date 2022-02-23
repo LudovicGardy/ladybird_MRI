@@ -19,7 +19,7 @@ To run the program, user can either open the script "_**start_app.py**_" using t
 
 ![](illustrations/fullpannel_and_zoom.png)
 
-# 3. Dependencies
+# 3. Requirements
 - cv2==4.5.5
 - imageio==2.14.1
 - pydicom==2.2.2
