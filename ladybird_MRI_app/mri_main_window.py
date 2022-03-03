@@ -38,7 +38,6 @@ class Main_Win(QMainWindow):
 
     def display_window(self, file_type):
         ### Load json file (data info) and events folder (raw data parts)
-        file_type = file_type.lower()
         self.file_type = file_type
 
         if "template" not in file_type:
@@ -49,9 +48,9 @@ class Main_Win(QMainWindow):
             fpath = os.path.join(fpath,"{}.nii.gz".format(template_name))
             self.atlas_name = os.path.split(fpath)[-1].split(".")[0]
 
-        if "nifti" in file_type and "template" not in file_type:
+        if "nifti" in file_type and "template" not in file_type.lower():
             fpath = QFileDialog.getOpenFileName(None, "Select a NIfTI file:", fpath, "NIfTI files (*.nii *nii.gz)")[0]
-        elif "dicom" in file_type and "template" not in file_type:
+        elif "dicom" in file_type and "template" not in file_type.lower():
             fpath = QFileDialog.getExistingDirectory(None, 'Select a DICOM folder:', fpath, QFileDialog.ShowDirsOnly)
 
         try:
@@ -59,7 +58,7 @@ class Main_Win(QMainWindow):
             self.show()
         except:
             var = traceback.format_exc()
-            print(var)
+            user_answer = messageBox_popup("Error", f"Did you load data? \n\n{var}", QMessageBox.Icon.Critical, cancel_option = False)
 
     def init_MainWidget(self, fpath, file_type):
         self.centWidget = MRI_widget(fpath, file_type)
@@ -76,7 +75,6 @@ class Main_Win(QMainWindow):
         self.load_menu.addMenu(self.load_sub_menu)
         self.atlas = QMenu('&Atlas',self)
         self.atlas.addAction('&AAL', lambda:self.display_window("nifti-template-aal"))
-        self.atlas.addAction('&AAL3', lambda:self.display_window("nifti-template-AAL3v1_for_SPM12"))
         self.atlas.addAction('&AICHAmc', lambda:self.display_window("nifti-template-AICHAmc"))
         self.atlas.addAction('&Brodmann', lambda:self.display_window("nifti-template-brodmann"))
         self.atlas.addAction('&Ch2', lambda:self.display_window("nifti-template-ch2"))
