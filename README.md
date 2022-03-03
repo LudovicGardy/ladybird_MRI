@@ -13,18 +13,19 @@ Clinical/research images can be loaded. Several atlases are also available in th
 To run the program, user can either open the script "_**start_app.py**_" using the terminal, or simply double click the "_**start_app**_" file, that should automatically launch the GUI.
 
 ```
-> cd root\Ladybird_MRI_viz
+> cd root\ladybird_MRI_app
 > python start_app.py
 ```
 
 ![](illustrations/fullpannel_and_zoom.png)
 
 # 3. Requirements
-- cv2==4.5.5
-- imageio==2.14.1
-- pydicom==2.2.2
-- PyQt5==5.15.6
-- matplotlib==3.5.1
-- nibabel==3.2.1
-- numpy==1.21.5
-- scipy==1.7.3
+Listed in "_**requirements.txt**_".
+
+```
+> pip install -r requirements.txt
+```
+
+# 4. References
+- MRI atlases: https://www.nitrc.org/projects/mricron
+- Toolbar icones: https://icons8.com/

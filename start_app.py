@@ -5,10 +5,10 @@ E-mail: ludovic.gardy@cnrs.fr
 Encoding: UTF-8
 """
 import sys
-from PyQt5.QtCore import QCoreApplication
-from PyQt5.QtWidgets import (QApplication)
+from PyQt6.QtCore import QCoreApplication
+from PyQt6.QtWidgets import (QApplication)
 
-from Ladybird_MRI_viz.main_window import Main_Win
+from ladybird_MRI_app.mri_main_window import Main_Win
 
 if __name__ == "__main__":
     # Avoid python kernel from dying
@@ -19,4 +19,4 @@ if __name__ == "__main__":
     # run
     mywindow = Main_Win()
     mywindow.show()
-    sys.exit(app.exec_())
+    sys.exit(app.exec())
