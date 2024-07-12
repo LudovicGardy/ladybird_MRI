@@ -1,2 +1,0 @@
-The templates in this folder originate from mricron software.
-https://www.nitrc.org/projects/mricron

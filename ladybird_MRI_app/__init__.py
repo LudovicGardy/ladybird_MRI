@@ -1,1 +1,0 @@
-print("mri GUI Initilization...")

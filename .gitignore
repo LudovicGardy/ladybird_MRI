@@ -1,8 +1,17 @@
 ### Ignore these folders
 __pycache__/
+.mypy_cache/
+.venv/
 .vs/
+.DS_Store
+.ipynb_checkpoints
+derivatives/
+program/.ipynb_checkpoints
+program/events_data
 pptx/
+app.py
 
 ### Ignore these files
-illustrations.pptx
-start_app_LG.bat
+Shared_scripts.pyproj
+Shared_scripts.sln
+start_demo_extended.ipynb
