@@ -6,16 +6,13 @@ Encoding: UTF-8
 """
 import os
 
-from PyQt6.QtWidgets import (QWidget, QVBoxLayout, QSizePolicy,
-    QHBoxLayout, QFrame, QSlider)
-from PyQt6 import (QtCore, QtGui)
-from PyQt6.QtGui import QIcon
+from PyQt6.QtWidgets import QWidget, QVBoxLayout, QSizePolicy
+from PyQt6 import QtGui
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
 import matplotlib.pyplot as plt
 
-from modules.config_file import get_path
-path_dict = get_path()
+from src.env_global.config.config import get_path
 
 class MplCanvas(FigureCanvas):
     '''
@@ -53,11 +50,12 @@ class ExpandedCanvas(QWidget):
     is inserted, where user click the "expand button" in the
     toolbar of the main window.
     '''
+    
     def __init__(self):
         super().__init__()
 
         self.setWindowTitle("Expanded view")
-        self.setWindowIcon(QtGui.QIcon(os.path.join(path_dict["root"], "modules", "static", "mri.ico")))
+        self.setWindowIcon(QtGui.QIcon(get_path()["mri.ico"]))
 
         self.main_layout = QVBoxLayout()
 

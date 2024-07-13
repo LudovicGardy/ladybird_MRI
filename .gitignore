@@ -3,15 +3,18 @@ __pycache__/
 .mypy_cache/
 .venv/
 .vs/
-.DS_Store
-.ipynb_checkpoints
+.buffer/
+.ipynb_checkpoints/
 derivatives/
 program/.ipynb_checkpoints
 program/events_data
 pptx/
-app.py
+
 
 ### Ignore these files
+.DS_Store
+.env
 Shared_scripts.pyproj
 Shared_scripts.sln
 start_demo_extended.ipynb
+app.py
