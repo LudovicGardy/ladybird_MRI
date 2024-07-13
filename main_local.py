@@ -6,7 +6,7 @@ Encoding: UTF-8
 """
 import sys
 from PyQt6.QtWidgets import QApplication
-from modules.mri_main_window import Main_Win
+from src.env_local.modules.mri_main_window import Main_Win
 
 if __name__ == "__main__":
     # Avoid python kernel from dying

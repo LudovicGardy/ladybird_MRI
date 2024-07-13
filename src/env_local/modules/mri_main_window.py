@@ -10,14 +10,12 @@ from PyQt6 import (QtCore, QtGui)
 from PyQt6.QtGui import QIcon, QAction
 from PyQt6.QtCore import QCoreApplication
 
-from modules.load_volume import load_volume
-from modules.plot_volume import plot_volume
-from modules.zoomed_window import MplCanvas, ExpandedCanvas
-from modules.widgets.custom_slider import custom_slider
-from modules.messageBox_popup import messageBox_popup
-
-from modules.config_file import get_path
-path_dict = get_path()
+from src.env_global.modules.load_volume import load_volume
+from src.env_global.config.config import get_path
+from src.env_local.widgets.custom_slider import custom_slider
+from src.env_local.modules.zoomed_window import MplCanvas, ExpandedCanvas
+from src.env_local.modules.messageBox_popup import messageBox_popup
+from src.env_local.modules.plot_volume import plot_volume
 
 developper_mode_1 = True
 developper_mode_2 = True
@@ -28,7 +26,7 @@ class Main_Win(QMainWindow):
         self.setWindowTitle("Ladybird - Imagery widget")
         left = 75 ; top = 75 ; width = 900 ; height = 900
 
-        self.setWindowIcon(QtGui.QIcon(os.path.join(path_dict["root"], "modules", "static", "mri.ico")))
+        self.setWindowIcon(QtGui.QIcon(get_path()["mri.ico"]))
         self.setGeometry(left, top, width, height)
 
         self.atlas_name = ""
@@ -37,13 +35,12 @@ class Main_Win(QMainWindow):
         self.set_toolbar()
 
     def display_window(self, file_type):
-        ### Load json file (data info) and events folder (raw data parts)
         self.file_type = file_type
 
         if "template" not in file_type:
-            fpath = path_dict["mri_examples"]
+            fpath = get_path()["mri_examples"]
         elif "template" in file_type:
-            fpath = os.path.join(path_dict["mri_examples"], "atlas")
+            fpath = os.path.join(get_path()["mri_examples"], "atlas")
             template_name  = file_type.split("-")[-1]
             fpath = os.path.join(fpath,"{}.nii.gz".format(template_name))
             self.atlas_name = os.path.split(fpath)[-1].split(".")[0]
@@ -102,14 +99,22 @@ class Main_Win(QMainWindow):
 
         ##### Set buttons #####
         ### New button
-        rotateLeft_button = QAction(QtGui.QIcon(os.path.join(path_dict["toolbar_icones"], "icons8-rotate-left-96.png")),
+        rotateLeft_button = QAction(QtGui.QIcon(os.path.join(get_path()["toolbar_icones"], "icons8-rotate-left-96.png")),
                                 "Rotate left", self)
         rotateLeft_button.triggered.connect(self.rotateLeft_button_fun)
         #rotateLeft_button.setCheckable(True)
         toolbar.addAction(rotateLeft_button)
 
+        print(os.path.join(get_path()["toolbar_icones"], "icons8-rotate-left-96.png"))
+        print(os.path.join(get_path()["toolbar_icones"], "icons8-rotate-left-96.png"))
+        print(os.path.join(get_path()["toolbar_icones"], "icons8-rotate-left-96.png"))
+        print(os.path.join(get_path()["toolbar_icones"], "icons8-rotate-left-96.png"))
+        print(os.path.join(get_path()["toolbar_icones"], "icons8-rotate-left-96.png"))
+        print(os.path.join(get_path()["toolbar_icones"], "icons8-rotate-left-96.png"))
+        print(os.path.join(get_path()["toolbar_icones"], "icons8-rotate-left-96.png"))
+
         ### New button
-        rotateRight_button = QAction(QtGui.QIcon(os.path.join(path_dict["toolbar_icones"], "icons8-rotate-right-96.png")),
+        rotateRight_button = QAction(QtGui.QIcon(os.path.join(get_path()["toolbar_icones"], "icons8-rotate-right-96.png")),
                                 "Rotate right", self)
         rotateRight_button.triggered.connect(self.rotateRight_button_fun)
         #rotateRight_button.setCheckable(True)
@@ -126,7 +131,7 @@ class Main_Win(QMainWindow):
         self.spinbox.textChanged.connect(self.value_changed_str)
 
         ### New button
-        expandVew_button = QAction(QtGui.QIcon(os.path.join(path_dict["toolbar_icones"], "icons8-expand-96.png")),
+        expandVew_button = QAction(QtGui.QIcon(os.path.join(get_path()["toolbar_icones"], "icons8-expand-96.png")),
                                 "Expand view", self)
         expandVew_button.triggered.connect(self.call_centWidget_expandView_fun)
         #rotateRight_button.setCheckable(True)
@@ -137,21 +142,21 @@ class Main_Win(QMainWindow):
         toolbar.addSeparator()
 
         ### New button
-        button1 = QAction(QtGui.QIcon(os.path.join(path_dict["toolbar_icones"], "icons8-restore-window-64.png")),
+        button1 = QAction(QtGui.QIcon(os.path.join(get_path()["toolbar_icones"], "icons8-restore-window-64.png")),
                                 "Restore original", self)
         button1.triggered.connect(self.restore_original_image)
         #rotateRight_button.setCheckable(True)
         toolbar.addAction(button1)
 
         ### New button
-        button2 = QAction(QtGui.QIcon(os.path.join(path_dict["toolbar_icones"], "icons8-statistics-64.png")),
+        button2 = QAction(QtGui.QIcon(os.path.join(get_path()["toolbar_icones"], "icons8-statistics-64.png")),
                                 "Sobel filter", self)
         button2.triggered.connect(lambda:self.contrast_button_fun("contour"))
         #rotateRight_button.setCheckable(True)
         toolbar.addAction(button2)
 
         ### New button
-        button3 = QAction(QtGui.QIcon(os.path.join(path_dict["toolbar_icones"], "icons8-illumination-brightness-96.png")),
+        button3 = QAction(QtGui.QIcon(os.path.join(get_path()["toolbar_icones"], "icons8-illumination-brightness-96.png")),
                                 "Brightness", self)
         button3.triggered.connect(lambda:self.brightness_button_fun("log"))
         #rotateRight_button.setCheckable(True)

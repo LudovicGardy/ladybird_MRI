@@ -5,6 +5,7 @@ import imageio
 import cv2
 from scipy import ndimage
 
+
 def plot_volume(figure_canvas, volume, slice_type, n_slice, kernel = [], file_type = "", atlas_name = "", rotation = 0):
     """
     This function is called by the GUI when user intend to display images or to
