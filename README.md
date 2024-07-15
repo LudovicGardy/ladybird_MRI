@@ -1,7 +1,8 @@
-# Halyzia© / Ladybird MRI & Medical Scanner Viewer
+# Ladybird MRI & Medical Scanner Viewer
 
 ## 📄 Description
-Halyzia©, also known as Ladybird, is a sophisticated software designed for the automatic detection of fast-ripples (FRs) in epilepsy, as described in the [doctoral thesis of L. Gardy](http://thesesups.ups-tlse.fr/5164/1/2021TOU30190.pdf) and patented under [Brevet: FR3128111](https://data.inpi.fr/brevets/FR3128111). This repository showcases a component of Halyzia© that is focused on the visualization and manipulation of 3D medical images such as MRI and PET scans. This component is designed to function independently of the complete software suite, providing standalone capabilities for medical image navigation and analysis.
+
+This repository showcases a component of [Ladybird](#about-ladybird) dedicated to the visualization and manipulation of 3D medical images, including MRI and PET scans. Operating independently from the complete software suite, this component provides standalone capabilities for navigating and analyzing medical images.
 
 The MRI viewer included in this repository provides robust tools for navigating and interacting with 3D medical images. It supports a wide range of common image formats, including NIfTI (compressed `.nii.gz` and uncompressed `.nii`) and DICOM. Users can load both clinical and research images, with several atlases accessible from the shared database. Key functionalities include zooming in on specific anatomical planes, rotating images, and applying various image processing filters. This tool is designed to facilitate detailed analysis and enhance the visualization of medical imaging data.
 
@@ -42,9 +43,29 @@ streamlit run main_web.py  # Launches the web GUI
 
 **Public URL:** coming soon.
 
+⚠️ The PyQt (local) version being less generic and more difficult to maintain, it will not be updated in the future. Only the web version will be maintained and updated if necessary.
+
 ## 📚 References
 - MRI atlases: https://www.nitrc.org/projects/mricron
 - Toolbar icones: https://icons8.com/
+
+#### About Ladybird
+Ladybird, developed during [L. Gardy's doctoral research](http://thesesups.ups-tlse.fr/5164/1/2021TOU30190.pdf) under the guidance of [E. Barbeau](https://cerco.cnrs.fr/page-perso-emmanuel-j-barbeau-ph-d/) (neuroscientist, CNRS) and [C. Hurter](http://recherche.enac.fr/~hurter/presentation.html) (engineer, ENAC), is a sophisticated software designed for the automatic detection of fast-ripples (FRs) in epilepsy. Originally developed by L. Gardy, with significant input from various researchers and medical professionals the early trials in the neurology department at Toulouse Hospital, along with support from various academic and economic entities, led to widespread enthusiasm and substantial funding, allowing for further development and eventual patenting ([Brevet: FR3128111](https://data.inpi.fr/brevets/FR3128111)). Ladybird was later rebranded as Halyzia©, a name change necessitated for trademark reasons, and is now being further developed and commercialized by the French startup Avrio MedTech.
+
+<table style="width:100%;">
+  <tr>
+    <td style="width:50%;"><img src="images/ladybird1.jpg" alt="Image 1" style="width:100%;"></td>
+    <td style="width:50%;"><img src="images/ladybird2.jpg" alt="Image 2" style="width:100%;"></td>
+  </tr>
+  <tr>
+    <td style="width:50%;"><img src="images/ladybird3.jpg" alt="Image 3" style="width:100%;"></td>
+    <td style="width:50%;"><img src="images/ladybird4.jpg" alt="Image 4" style="width:100%;"></td>
+  </tr>
+  <tr>
+    <td style="width:50%;"><img src="images/ladybird5.jpg" alt="Image 3" style="width:100%;"></td>
+    <td style="width:50%;"><img src="images/ladybird6.jpg" alt="Image 4" style="width:100%;"></td>
+  </tr>
+</table>
 
 ## 👤 Author
 - LinkedIn: [Ludovic Gardy](https://www.linkedin.com/in/ludovic-gardy/)
