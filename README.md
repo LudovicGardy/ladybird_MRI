@@ -54,16 +54,16 @@ Ladybird, developed during [L. Gardy's doctoral research](http://thesesups.ups-t
 
 <table style="width:100%;">
   <tr>
-    <td style="width:50%;"><img src="images/ladybird1.jpg" alt="Image 1" style="width:100%;"></td>
-    <td style="width:50%;"><img src="images/ladybird2.jpg" alt="Image 2" style="width:100%;"></td>
+    <td style="width:50%;"><img src="images/ladybird1_v1.jpg" alt="Image 1" style="width:100%;"></td>
+    <td style="width:50%;"><img src="images/ladybird2_v1.jpg" alt="Image 2" style="width:100%;"></td>
   </tr>
   <tr>
-    <td style="width:50%;"><img src="images/ladybird3.jpg" alt="Image 3" style="width:100%;"></td>
-    <td style="width:50%;"><img src="images/ladybird4.jpg" alt="Image 4" style="width:100%;"></td>
+    <td style="width:50%;"><img src="images/ladybird3_v1.jpg" alt="Image 3" style="width:100%;"></td>
+    <td style="width:50%;"><img src="images/ladybird4_v1.jpg" alt="Image 4" style="width:100%;"></td>
   </tr>
   <tr>
-    <td style="width:50%;"><img src="images/ladybird5.jpg" alt="Image 3" style="width:100%;"></td>
-    <td style="width:50%;"><img src="images/ladybird6.jpg" alt="Image 4" style="width:100%;"></td>
+    <td style="width:50%;"><img src="images/ladybird5_v1.jpg" alt="Image 5" style="width:100%;"></td>
+    <td style="width:50%;"><img src="images/ladybird6_v1.jpg" alt="Image 6" style="width:100%;"></td>
   </tr>
 </table>
 
