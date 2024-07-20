@@ -34,7 +34,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 ### Main class for the imagery widget
-class ImageryWidget:
+class App:
     def __init__(self):
         st.session_state.views = {"Sagittal": 0, "Frontal": 1, "Axial": 2}
         self.path_dict = get_path()
@@ -203,4 +203,4 @@ class ImageryWidget:
                     st.rerun()
 
 if __name__ == "__main__":
-    ImageryWidget()
+    app = App()
