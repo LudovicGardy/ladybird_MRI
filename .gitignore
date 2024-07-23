@@ -9,6 +9,7 @@ derivatives/
 program/.ipynb_checkpoints
 program/events_data
 pptx/
+niftii
 
 
 ### Ignore these files
@@ -18,3 +19,4 @@ Shared_scripts.pyproj
 Shared_scripts.sln
 start_demo_extended.ipynb
 app.py
+ci_f_ax_59_GL_T1_3D.nii.gz
