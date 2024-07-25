@@ -14,7 +14,6 @@ from src.env_web.modules.utils import resize_volume
 # TODO: manage DICOM format (folder)
 
 
-### Main class for the imagery widget
 class Home:
     def __init__(self):
         self.init_types()
@@ -151,6 +150,7 @@ class Home:
             st.write("""Click on the thumbnails to select a slice.""")
             self.display_thumbnail_view(kernel, st.session_state.colormap)
 
+    @st.experimental_fragment
     def display_thumbnail_view(self, kernel, colormap):
         num_thumbnails = 5
 
@@ -186,4 +186,4 @@ class Home:
 
 
 if __name__ == "__main__":
-    app = App()
+    home = Home()
