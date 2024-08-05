@@ -41,7 +41,7 @@ streamlit run main_web.py  # Launches the web GUI
 
 ![](images/image2.png)
 
-**Public URL:** coming soon.
+**Public URL:** [https://med-viewer.app](https://med-viewer-3d-35a20a74b896.herokuapp.com/).
 
 ⚠️ The PyQt (local) version being less generic and more difficult to maintain, it will not be updated in the future. Only the web version will be maintained and updated if necessary.
 
