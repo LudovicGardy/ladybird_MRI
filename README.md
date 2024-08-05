@@ -8,6 +8,8 @@ The MRI viewer included in this repository provides robust tools for navigating 
 
 ⚠️ Please note that this MRI viewer is still under development and has not been validated by any regulatory authority. It was developed as part of research projects and is intended as a side project with no major pretensions.
 
+🌐 Access the app and start your analysis now at [https://med-viewer.app](https://med-viewer-3d-35a20a74b896.herokuapp.com/).
+
 ## ⚒️ Installation
 
 ### Prerequisites
@@ -40,8 +42,6 @@ streamlit run main_web.py  # Launches the web GUI
 ```
 
 ![](images/image2.png)
-
-**Public URL:** [https://med-viewer.app](https://med-viewer-3d-35a20a74b896.herokuapp.com/).
 
 ⚠️ The PyQt (local) version being less generic and more difficult to maintain, it will not be updated in the future. Only the web version will be maintained and updated if necessary.
 
