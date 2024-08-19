@@ -11,8 +11,6 @@ from src.env_web.modules.plot_volume import modify_colormap, plot_volume
 from src.env_web.modules.ui_components import display_sidebar
 from src.env_web.modules.utils import resize_volume
 
-# TODO: manage DICOM format (folder)
-
 
 class Home:
     def __init__(self):
@@ -46,8 +44,6 @@ class Home:
         )
 
     def load_ui(self):
-        # st.title(f"Selected view: {st.session_state.view.lower()}")
-
         uploaded_file = None
         if self.file_type == "nifti":
             uploaded_file = st.file_uploader("Upload NIfTI file", type=["nii", "gz"])
@@ -68,7 +64,7 @@ class Home:
         if uploaded_file:
             try:
                 if st.session_state.uploaded_file_name != uploaded_file.name:
-                    save_dir = ".buffer"  # Change this to your desired directory
+                    save_dir = ".buffer"
                     os.makedirs(save_dir, exist_ok=True)
                     file_path = os.path.join(save_dir, uploaded_file.name)
 
@@ -79,7 +75,7 @@ class Home:
                     st.session_state.uploaded_file_name = uploaded_file.name
                     st.session_state.file_type = self.file_type
 
-                    # Vider le buffer de uploaded_file
+                    # Empty the uploaded_file buffer
                     uploaded_file.seek(0)
                     uploaded_file.truncate(0)
             except Exception as e:
@@ -133,25 +129,21 @@ class Home:
 
         fig, ax = plt.subplots(figsize=(10, 10))
         plot_volume(
-            fig,
             ax,
             st.session_state.volume,
             st.session_state.view,
             st.session_state.slice_index,
-            kernel,
-            st.session_state.file_type,
-            st.session_state.atlas_name,
             st.session_state.colormap,
             st.session_state.angle,
         )
         st.pyplot(fig)
 
         with st.expander("Thumbnails View"):
-            st.write("""Click on the thumbnails to select a slice.""")
-            self.display_thumbnail_view(kernel, st.session_state.colormap)
+            st.write("Click on the thumbnails to select a slice.")
+            self.display_thumbnail_view(st.session_state.colormap)
 
     @st.experimental_fragment
-    def display_thumbnail_view(self, kernel, colormap):
+    def display_thumbnail_view(self, colormap):
         num_thumbnails = 5
 
         thumbnail_indices = np.linspace(
@@ -168,19 +160,15 @@ class Home:
             with thumbnails[i]:
                 fig, ax = plt.subplots(figsize=(4, 4))
                 plot_volume(
-                    fig,
                     ax,
                     st.session_state.volume,
                     st.session_state.view,
                     idx,
-                    kernel,
-                    st.session_state.file_type,
-                    st.session_state.atlas_name,
                     colormap,
                     st.session_state.angle,
                 )
                 st.pyplot(fig)
-                if st.button(f"Select Slice", key=f"select_{idx}"):
+                if st.button("Select Slice", key=f"select_{idx}"):
                     st.session_state.slice_index = idx
                     st.rerun()
 

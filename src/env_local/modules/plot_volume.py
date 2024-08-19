@@ -1,12 +1,19 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib
-import imageio
-import cv2
 from scipy import ndimage
 
 
-def plot_volume(figure_canvas, volume, slice_type, n_slice, kernel = [], file_type = "", atlas_name = "", rotation = 0):
+def plot_volume(
+    figure_canvas,
+    volume,
+    slice_type,
+    n_slice,
+    kernel=[],
+    file_type="",
+    atlas_name="",
+    rotation=0,
+):
     """
     This function is called by the GUI when user intend to display images or to
     update them.
@@ -56,27 +63,49 @@ def plot_volume(figure_canvas, volume, slice_type, n_slice, kernel = [], file_ty
     elif slice_type == "View_1":
         img = volume[n_slice, :, :]
 
-    img = np.rot90(img,rotation)
+    img = np.rot90(img, rotation)
 
     if len(kernel) > 0:
         if type(kernel) == list or type(kernel) == np.ndarray:
-            img = ndimage.filters.convolve(img, kernel, mode='nearest')
+            img = ndimage.filters.convolve(img, kernel, mode="nearest")
             img[img < 0] = 0
         elif kernel.lower() == "sobel":
-            #img = cv2.Sobel(img, cv2.CV_8U, 1, 1, ksize = 1)
-            sobel_x = ndimage.filters.convolve(img, np.array([ [-1,0,1], [-2,0,2], [-1,0,1] ]), mode='nearest')
-            sobel_y = ndimage.filters.convolve(img, np.array([ [-1,-2,-1], [0,0,0], [1,2,1] ]), mode='nearest')
-            img = np.sqrt( sobel_x**2 + sobel_y**2 )
+            # img = cv2.Sobel(img, cv2.CV_8U, 1, 1, ksize = 1)
+            sobel_x = ndimage.filters.convolve(
+                img, np.array([[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]]), mode="nearest"
+            )
+            sobel_y = ndimage.filters.convolve(
+                img, np.array([[-1, -2, -1], [0, 0, 0], [1, 2, 1]]), mode="nearest"
+            )
+            img = np.sqrt(sobel_x**2 + sobel_y**2)
 
-    if "template" in file_type and "ch2" not in atlas_name and "inia19" not in atlas_name:
-        clist = ["#000000" ,"#a6cee3", "#1f78b4","#b2df8a", "#33a02c", "#fb9a99", "#e31a1c", "#fdbf6f", "#ff7f00", "#cab2d6", "#6a3d9a", "#ffff99", "#b15928"]
+    if (
+        "template" in file_type
+        and "ch2" not in atlas_name
+        and "inia19" not in atlas_name
+    ):
+        clist = [
+            "#000000",
+            "#a6cee3",
+            "#1f78b4",
+            "#b2df8a",
+            "#33a02c",
+            "#fb9a99",
+            "#e31a1c",
+            "#fdbf6f",
+            "#ff7f00",
+            "#cab2d6",
+            "#6a3d9a",
+            "#ffff99",
+            "#b15928",
+        ]
         cmap = matplotlib.colors.ListedColormap(clist)
     else:
         cmap = plt.cm.gray
 
-    ax.imshow(img, interpolation='nearest', cmap=cmap, aspect = 'auto')
-    ax.axis('off')
+    ax.imshow(img, interpolation="nearest", cmap=cmap, aspect="auto")
+    ax.axis("off")
 
     figure_canvas.draw()
 
-    return(img)
+    return img
