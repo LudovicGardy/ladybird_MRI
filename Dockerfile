@@ -13,4 +13,4 @@ RUN pip install --upgrade pip && \
 COPY . .
 
 # Run Python script
-CMD ["streamlit", "run", "main.py"]
+CMD ["streamlit", "run", "main_web.py"]
