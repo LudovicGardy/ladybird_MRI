@@ -5,7 +5,7 @@ FROM python:3.11-slim-buster
 WORKDIR .
 
 # Copy the requirements.txt file and install dependencies
-COPY requirements.txt .
+COPY requirements_web.txt .
 RUN pip install --upgrade pip && \
     pip install --no-cache-dir -r requirements_web.txt
 
