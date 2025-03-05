@@ -8,7 +8,7 @@ The MRI viewer included in this repository provides robust tools for navigating 
 
 ⚠️ Please note that this MRI viewer is still under development and has not been validated by any regulatory authority. It was developed as part of research projects and is intended as a side project with no major pretensions.
 
-🌐 Access the app and start your analysis now at [https://medviewer.sotisanalytics.com](https://medviewer.sotisanalytics.com).
+🌐 Access the app and start your analysis now at [https://medviewer.sotisai.com](https://medviewer.sotisai.com).
 
 ## ⚒️ Installation
 
