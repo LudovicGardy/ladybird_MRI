@@ -1,16 +1,25 @@
-# Python image
-FROM python:3.11-slim-buster
+# Utiliser une image Python compatible
+FROM python:3.13-rc-slim
 
-# Set the working directory
-WORKDIR .
+# Définir le dossier de travail
+WORKDIR /app
 
-# Copy the requirements.txt file and install dependencies
-COPY requirements_web.txt .
-RUN pip install --upgrade pip && \
-    pip install --no-cache-dir -r requirements_web.txt
+# Installer Poetry correctement (avec curl)
+RUN apt-get update && apt-get install -y curl && \
+    curl -sSL https://install.python-poetry.org | python3 - && \
+    ln -s /root/.local/bin/poetry /usr/local/bin/poetry
 
-# Copy the rest of the source code
+# Copier les fichiers de configuration de Poetry
+COPY pyproject.toml poetry.lock ./
+
+# Installer les dépendances sans installer le projet lui-même
+RUN poetry install --no-interaction --no-ansi --no-root
+
+# Copier le reste du code de l'application
 COPY . .
 
-# Run Python script
-CMD ["streamlit", "run", "main_web.py"]
+# Exposer le port de Streamlit
+EXPOSE 8501
+
+# Lancer l'application
+CMD ["poetry", "run", "streamlit", "run", "main_web.py", "--server.port=8501", "--server.address=0.0.0.0"]

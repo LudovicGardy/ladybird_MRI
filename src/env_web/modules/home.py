@@ -142,7 +142,7 @@ class Home:
             st.write("Click on the thumbnails to select a slice.")
             self.display_thumbnail_view(st.session_state.colormap)
 
-    @st.experimental_fragment
+    @st.fragment
     def display_thumbnail_view(self, colormap):
         num_thumbnails = 5
 

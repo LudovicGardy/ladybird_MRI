@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from typing import Any
 
 
-@st.experimental_fragment
+@st.fragment
 def plot_volume(
     ax: plt.Axes,
     volume: np.ndarray,
@@ -27,7 +27,7 @@ def plot_volume(
     ax.imshow(img, cmap=colormap)
 
 
-@st.experimental_fragment
+@st.fragment
 def modify_colormap(cmap: Colormap) -> Colormap:
     colors = cmap(np.arange(cmap.N))  # Copy the colormap to modify it
     colors[0] = [0, 0, 0, 1]  # Set the first color (value 0) to black
