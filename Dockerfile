@@ -1,25 +1,54 @@
-# Utiliser une image Python compatible
-FROM python:3.13-rc-slim
+# ===============================
+# Stage 1: build with all tools
+# ===============================
+FROM python:3.13-rc-slim AS builder
 
-# Définir le dossier de travail
 WORKDIR /app
 
-# Installer Poetry correctement (avec curl)
-RUN apt-get update && apt-get install -y curl && \
-    curl -sSL https://install.python-poetry.org | python3 - && \
-    ln -s /root/.local/bin/poetry /usr/local/bin/poetry
+# Install necessary tools to compile packages
+RUN apt-get update && apt-get install -y gcc libffi-dev build-essential curl && \
+    pip install --upgrade pip && \
+    pip install uv && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Copier les fichiers de configuration de Poetry
-COPY pyproject.toml poetry.lock ./
+# Copy only the config file
+COPY pyproject.toml ./
 
-# Installer les dépendances sans installer le projet lui-même
-RUN poetry install --no-interaction --no-ansi --no-root
+# Generate requirements.txt file from pyproject.toml
+RUN uv pip compile --output-file=requirements.txt pyproject.toml
 
-# Copier le reste du code de l'application
+# Install dependencies in a temporary venv
+RUN python -m venv /venv && \
+    /venv/bin/pip install --upgrade pip && \
+    /venv/bin/pip install -r requirements.txt
+
+# ===============================
+# Stage 2: lightweight image for execution
+# ===============================
+FROM python:3.13-rc-slim AS runtime
+
+# Create a non-root user
+RUN useradd -m appuser
+
+WORKDIR /app
+
+# Copy only the venv from the build image
+COPY --from=builder /venv /venv
+
+# Activate the venv
+ENV PATH="/venv/bin:$PATH"
+
+# Copy the app code
 COPY . .
 
-# Exposer le port de Streamlit
+# User permissions
+RUN chown -R appuser:appuser /app
+
+# Use secure user
+USER appuser
+
+# Expose Streamlit port
 EXPOSE 8501
 
-# Lancer l'application
-CMD ["poetry", "run", "streamlit", "run", "main_web.py", "--server.port=8501", "--server.address=0.0.0.0"]
+# Launch the app
+CMD ["streamlit", "run", "main_web.py", "--server.port=8501", "--server.address=0.0.0.0"]
