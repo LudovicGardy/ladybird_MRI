@@ -10,30 +10,90 @@ The MRI viewer included in this repository provides robust tools for navigating 
 
 🌐 Access the app and start your analysis now at [https://medviewer.sotisai.com](https://medviewer.sotisai.com).
 
-## ⚒️ Installation
+---
 
-### Prerequisites
-- Python 3.11
-- Python libraries
-    ```sh
-    pip install -r requiremetns_local.txt  # for PyQt6 GUI, and/or,
-    pip install -r requiremetns_web.txt  # for Web GUI
-    ```
+## ⚙️ Setup & Usage
 
-## 📝 Usage
+You can run the application in two ways:
 
-### Local version (PyQt GUI)
+- **Locally using `uv`**
+- **Using Docker Compose**
 
-#### Running the application
-To launch the MRI viewer, you can either execute the `main.py` script from the terminal or double-click the `main.bat` file to open the GUI automatically.
+### 🔧 Option 1 — Run Locally with `uv`
 
+> `uv` is a fast and modern Python tool that handles virtual environments and dependencies via `pyproject.toml`.
+
+1. **Install `uv`** (if not already installed)  
+   ```bash
+   curl -Ls https://astral.sh/uv/install.sh | sh
+   ```
+
+2. **Clone the repository**  
+   ```bash
+   git clone https://github.com/LudovicGardy/app_name
+   cd app_folder/
+   ```
+
+3. **Create and activate the environment**  
+   ```bash
+   uv venv
+   ```
+
+   - On **macOS/Linux**:
+     ```bash
+     source .venv/bin/activate
+     ```
+
+   - On **Windows** (PowerShell):
+     ```powershell
+     .venv\Scripts\Activate.ps1
+     ```
+
+4. **(Optional) If the virtual environment doesn't behave properly**
+
+   Sometimes, on macOS in particular, the environment might be missing some tooling (like `pip`). You can try the following fixes:
+
+   ```bash
+   .venv/bin/python -m ensurepip --upgrade
+   .venv/bin/python -m pip install --upgrade pip
+   # Optional: Only if you need to use Jupyter notebooks
+   .venv/bin/python -m pip install ipykernel -U --force-reinstall
+   ```
+
+5. **Launch the app**  
+   ```bash
+   streamlit run main.py
+   ```
+
+### 🐳 Option 2 — Run with Docker Compose
+
+1. **Make sure Docker and Docker Compose are installed and running**
+
+2. **Go to the project directory**
+   ```bash
+   cd path/to/app_folder
+   ```
+
+3. **Build and start the app**
+   ```bash
+   docker-compose up --build
+   ```
+
+4. **Access the app**
+   Open your browser at: [http://localhost:8505](http://localhost:8505)
+
+---
+
+## 📱 Running the App using PyQt or Streamlit
+
+### PyQt version
 ```sh
 python main_local.py  # Launches the local GUI
 ```
 
 ![](images/image1.png)
 
-### <span style="color:red">Update!</span> The app is now available on a Web GUI
+### Streamlit version (default)
 The local version of the MRI viewer has been adapted for web deployment using Streamlit. This web version offers comparable functionalities as the local version, with a user-friendly interface accessible from any web browser. To run the web version, execute the `main_web.py` script and open the provided URL in your browser.
 The web version of the MRI viewer is designed to be accessible and easy to use, with a streamlined interface that simplifies the process of loading and viewing medical images. While the local version offers more advanced features and capabilities, the web version provides a convenient alternative for users who prefer a browser-based interface.
 
