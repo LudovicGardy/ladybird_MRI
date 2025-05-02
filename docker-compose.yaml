@@ -1,8 +1,8 @@
+version: '3.8'
+
 services:
   app:
     build: .
-    volumes:
-      - .:/app
     ports:
       - "8505:8501"
     environment:
