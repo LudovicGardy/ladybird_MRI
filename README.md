@@ -105,6 +105,44 @@ streamlit run main_web.py  # Launches the web GUI
 
 ⚠️ The PyQt (local) version being less generic and more difficult to maintain, it will not be updated in the future. Only the web version will be maintained and updated if necessary.
 
+---
+
+## 🛠️ Development
+
+### Pre-commit Hooks
+
+This project uses pre-commit to maintain code quality. The following hooks are configured:
+
+- **Basic hooks**: checking for trailing whitespaces, end-of-file formatting, YAML and TOML file verification, etc.
+- **Ruff**: Python code linting and formatting
+- **Codespell**: spell checking
+- **Commitizen**: checking commit messages according to the defined convention
+
+To install pre-commit:
+
+```bash
+# Install dependencies
+uv pip install pre-commit ruff
+
+# Install git hooks
+pre-commit install
+```
+
+The hooks will run automatically with each commit. You can also run them manually:
+
+```bash
+pre-commit run --all-files  # Run on all files
+pre-commit run ruff         # Run a specific hook
+```
+
+Ruff configuration is defined in `pyproject.toml` and includes:
+- reStructuredText docstring format
+- Import checking
+- Double quote formatting
+- Line length limited to 100 characters
+
+---
+
 ## 📚 References
 - MRI atlases: https://www.nitrc.org/projects/mricron
 - Toolbar icones: https://icons8.com/
@@ -126,6 +164,8 @@ Ladybird, developed during [L. Gardy's doctoral research](http://thesesups.ups-t
     <td style="width:50%;"><img src="images/ladybird6_v1.jpg" alt="Image 6" style="width:100%;"></td>
   </tr>
 </table>
+
+---
 
 ## 👤 Author
 - LinkedIn: [Ludovic Gardy](https://www.linkedin.com/in/ludovic-gardy/)
